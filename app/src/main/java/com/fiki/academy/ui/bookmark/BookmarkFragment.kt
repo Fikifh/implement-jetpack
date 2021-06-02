@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.app.ShareCompat
+import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.fiki.academy.R
 import com.fiki.academy.data.CourseEntity
@@ -32,7 +33,8 @@ class BookmarkFragment : Fragment(), BookmarkAdapter.BookmarkFragmentCallback {
         super.onViewCreated(view, savedInstanceState)
 
         if(activity != null) {
-            val course = DataDummy.generateDummyCourses()
+            val viewModel = ViewModelProvider(this,ViewModelProvider.NewInstanceFactory())[BookmarkViewModel::class.java]
+            val course = viewModel.getBookmarks()
             val adapter = BookmarkAdapter(this)
             adapter.setCourse(course)
 
